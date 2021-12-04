@@ -1,0 +1,27 @@
+.idea-card {
+  border-radius: 2em;
+  background-image: url("https://image.freepik.com/free-photo/festive-christmas-composition-with-copy-space_23-2149155867.jpg");
+  background-size: cover;
+  height: 8.5em;
+  transition: all 0.3s ease-in-out;
+  margin: 1em 1.2em;
+
+  .title {
+    --ion-color-light: #fff;
+    font-weight: 900;
+    padding-left: 0.5em;
+    padding-top: 2.3em;
+    text-shadow: rgb(31, 30, 30) 1px 0 8px;
+    user-select: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.4);
+  }
+}
+
+ion-fab-button {
+  --border-width: 1.9px;
+  --border-style: solid;
+}
