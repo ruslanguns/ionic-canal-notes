@@ -1,27 +1,54 @@
 .idea-card {
+  display: grid;
+  grid-template-areas:
+    "t t t o"
+    "s s s o";
   border-radius: 2em;
-  background-image: url("https://image.freepik.com/free-photo/festive-christmas-composition-with-copy-space_23-2149155867.jpg");
-  background-size: cover;
   height: 8.5em;
-  transition: all 0.3s ease-in-out;
-  margin: 1em 1.2em;
+  margin: 0.7em 1.2em;
+  padding: 0.7em;
+  transition: all 0.2s;
+  --background-activated-opacity: 0.3;
+
+  .tags {
+    grid-area: t;
+    justify-self: start;
+
+    ion-badge {
+      margin: 2px;
+    }
+  }
+  .options {
+    grid-area: o;
+    justify-self: end;
+    align-self: center;
+    --ion-color-primary: transparent;
+    ion-button {
+      --padding-start: 0;
+      --padding-end: 0;
+    }
+  }
+  .summary {
+    grid-area: s;
+    align-self: end;
+  }
 
   .title {
     --ion-color-light: #fff;
     font-weight: 900;
-    padding-left: 0.5em;
-    padding-top: 2.3em;
-    text-shadow: rgb(31, 30, 30) 1px 0 8px;
+    line-height: 1rem;
+    text-shadow: 0 0 0.2em #000;
+
     user-select: none;
   }
 
-  &:hover {
-    cursor: pointer;
+  &:active {
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.4);
   }
-}
 
-ion-fab-button {
-  --border-width: 1.9px;
-  --border-style: solid;
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
