@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
 export interface Idea {
-  tags: string[];
-  description: string;
+  id?: string;
   title: string;
-  updatedAt: Date;
+  description: string;
+  tags: Array<'My idea' | 'Featured' | 'New'>;
   cover: string;
-  createdAt: Date;
-  id: string;
+  updatedAt: string;
+  createdAt: string;
 }
 
 export const ideaTags = {
