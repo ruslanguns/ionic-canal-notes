@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { IdeasService } from '../ideas.service';
 
 @Component({
   selector: 'app-ideas',
@@ -68,7 +69,9 @@ export class IdeasPage implements OnInit {
     },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private ideasService: IdeasService) {
+    this.ideasService.getAll().subscribe(console.log);
+  }
 
   ngOnInit() {}
 
