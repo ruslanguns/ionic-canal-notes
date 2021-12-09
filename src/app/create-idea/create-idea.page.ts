@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IdeasService } from '../ideas.service';
@@ -8,7 +8,7 @@ import { IdeasService } from '../ideas.service';
   templateUrl: './create-idea.page.html',
   styleUrls: ['./create-idea.page.scss'],
 })
-export class CreateIdeaPage implements OnInit {
+export class CreateIdeaPage {
   form: FormGroup;
 
   constructor(
@@ -17,12 +17,32 @@ export class CreateIdeaPage implements OnInit {
     private router: Router
   ) {
     this.form = this.fb.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
+      title: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(25),
+        ],
+      ],
+      description: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(999),
+        ],
+      ],
     });
   }
 
-  ngOnInit() {}
+  get titleLength() {
+    return this.form.value.title.length;
+  }
+
+  get descriptionLength() {
+    return this.form.value.description.length;
+  }
 
   onSubmit() {
     if (this.form.valid) {
