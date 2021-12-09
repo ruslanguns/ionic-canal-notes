@@ -4,10 +4,10 @@ export interface Idea {
   id?: string;
   title: string;
   description: string;
-  tags: Array<'My idea' | 'Featured' | 'New'>;
-  cover: string;
-  updatedAt: string;
-  createdAt: string;
+  tags?: Array<'My idea' | 'Featured' | 'New'>;
+  cover?: string;
+  updatedAt?: string;
+  createdAt?: string;
 }
 
 export const ideaTags = {

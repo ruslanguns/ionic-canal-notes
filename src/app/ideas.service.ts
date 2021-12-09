@@ -37,7 +37,18 @@ export class IdeasService {
 
   async create(idea: Idea) {
     try {
-      return await this.collection.add(idea);
+      const random1to5 = Math.floor(Math.random() * (5 - 1 + 1) + 1);
+
+      const createdAt = new Date().toISOString();
+      const updatedAt = createdAt;
+      const cover = `/assets/images/${random1to5}.jpeg`;
+
+      return await this.collection.add({
+        ...idea,
+        createdAt,
+        updatedAt,
+        cover,
+      });
     } catch (error) {
       console.log(error);
     }

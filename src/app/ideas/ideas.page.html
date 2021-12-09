@@ -24,7 +24,7 @@
       [style.background]="'url('+ idea.cover +')'"
       [style.background-size]="'cover'"
     >
-      <ng-container *ngIf="idea.tags.length">
+      <ng-container *ngIf="idea.tags?.length">
         <div class="tags">
           <ion-badge
             *ngFor="let tag of idea.tags"
