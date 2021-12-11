@@ -1,0 +1,36 @@
+<ion-card class="auth-form">
+  <ion-card-header>
+    <ion-card-title>Sign in</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+
+      <ion-button type="submit" expand="block" (click)="onSubmit()" [disabled]="!form.valid">Sign in</ion-button>
+
+      <ng-container *ngIf="user$ | async as user">
+        <ion-item>
+          <ion-text>
+            <p>{{ user | json }}</p>
+          </ion-text>
+        </ion-item>
+        <ion-button (click)="logout()" color="warning">
+          Logout
+        </ion-button>
+      </ng-container>
+    </form>
+
+    <ion-text class="extra-options">
+      Don't have an account yet?
+    </ion-text>
+  </ion-card-content>
+</ion-card>
