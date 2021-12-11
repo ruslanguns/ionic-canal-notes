@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ideaTags } from '../idea.interface';
-import { IdeasService } from '../ideas.service';
+import { IdeasService } from '../core/services/ideas.service';
 
 @Component({
   selector: 'app-ideas',

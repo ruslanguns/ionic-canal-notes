@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IdeasService } from '../ideas.service';
+import { IdeasService } from '../core/services/ideas.service';
 
 @Component({
   selector: 'app-create-idea',

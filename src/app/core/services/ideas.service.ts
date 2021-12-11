@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Idea } from './idea.interface';
+import { Idea } from '../../idea.interface';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class IdeasService {
-  constructor(private af: AngularFirestore) {}
+  constructor(private firestore: AngularFirestore) {}
 
   get collection() {
-    return this.af.collection<Idea>('ideas');
+    return this.firestore.collection<Idea>('ideas');
   }
 
   getAll(): Observable<Idea[]> {
