@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Idea } from '../../idea.interface';
 
 @Injectable()
 export class IdeasService {
-  constructor(private firestore: AngularFirestore) {}
+  constructor(
+    private firestore: AngularFirestore,
+    private toastController: ToastController
+  ) {}
 
   get collection() {
     return this.firestore.collection<Idea>('ideas');
@@ -50,7 +54,7 @@ export class IdeasService {
         cover,
       });
     } catch (error) {
-      console.log(error);
+      this.toastError(error || 'No tienes permisos para grabar');
     }
   }
 
@@ -68,5 +72,17 @@ export class IdeasService {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async toastError(error: any) {
+    const toast = await this.toastController.create({
+      message:
+        (error.message as string).split(': ')[1] ||
+        error ||
+        'Algo malo ha ocurrido',
+      duration: 4000,
+      color: 'danger',
+    });
+    toast.present();
   }
 }

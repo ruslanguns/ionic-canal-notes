@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -9,9 +10,13 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class LoginComponent {
   form: FormGroup;
-  user$ = this.authService.state$;
+  user$ = this.authService.user$;
 
-  constructor(private authService: AuthService, private fb: FormBuilder) {
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
     this.form = this.fb.group({
       email: ['ruslanguns+rusgunx@gmail.com', [Validators.required]],
       password: ['', [Validators.required]],
@@ -21,11 +26,9 @@ export class LoginComponent {
   onSubmit() {
     if (this.form.valid) {
       const { email, password } = this.form.value;
-      this.authService.login(email, password);
+      this.authService
+        .login(email, password)
+        .then(() => this.router.navigate(['/']));
     }
-  }
-
-  logout() {
-    this.authService.logout();
   }
 }

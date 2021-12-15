@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { IsLoginGuard } from '../core/guards/is-loging.guard';
 
 import { AuthPage } from './auth.page';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
@@ -10,6 +11,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 const routes: Routes = [
   {
     path: '',
+    canActivate: [IsLoginGuard],
+    canActivateChild: [IsLoginGuard],
     component: AuthPage,
     children: [
       {

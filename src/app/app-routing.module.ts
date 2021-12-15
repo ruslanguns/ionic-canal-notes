@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { IsLogoutGuard } from './core/guards/is-logout.guard';
 
 const routes: Routes = [
   {
@@ -9,6 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'create',
+    // canActivate: [IsLogoutGuard],
     loadChildren: () =>
       import('./create-idea/create-idea.module').then(
         (m) => m.CreateIdeaPageModule

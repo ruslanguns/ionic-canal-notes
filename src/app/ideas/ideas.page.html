@@ -3,12 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-searchbar
-      class="ion-margin-top"
-      color="light"
-      placeholder="Find an idea"
-      mode="ios"
-    >
+    <ion-searchbar class="ion-margin-top" color="light" placeholder="Find an idea" mode="ios">
     </ion-searchbar>
     <ion-button color="light" slot="end">
       <ion-icon name="filter-sharp" class="ion-padding"></ion-icon>
@@ -17,19 +12,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
   <ng-container *ngIf="ideas$ | async as ideas">
-    <ion-card
-      class="idea-card ion-activatable"
-      *ngFor="let idea of ideas"
-      [style.background]="'url('+ idea.cover +')'"
-      [style.background-size]="'cover'"
-    >
+    <ion-card class="idea-card ion-activatable" *ngFor="let idea of ideas" [style.background]="'url('+ idea.cover +')'"
+      [style.background-size]="'cover'">
       <ng-container *ngIf="idea.tags?.length">
         <div class="tags">
-          <ion-badge
-            *ngFor="let tag of idea.tags"
-            [color]="ideaTags[tag].color"
-          >
+          <ion-badge *ngFor="let tag of idea.tags" [color]="ideaTags[tag].color">
             {{ideaTags[tag].content}}
           </ion-badge>
         </div>
@@ -48,14 +37,19 @@
     </ion-card>
   </ng-container>
 
-  <ion-fab
-    class="create-idea-button"
-    vertical="bottom"
-    horizontal="end"
-    slot="fixed"
-  >
-    <ion-fab-button color="success" (click)="goToCreateIdea()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+  <ng-container *ngIf="user$ | async as user; else NoUserLogin">
+    <ion-fab class="create-idea-button" vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="success" (click)="goToCreateIdea()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ng-container>
+
+  <ng-template #NoUserLogin>
+    <ion-fab class="create-idea-button" vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="success" (click)="goToLogin()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ng-template>
 </ion-content>
