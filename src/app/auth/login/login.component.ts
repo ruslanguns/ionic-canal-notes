@@ -10,7 +10,6 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class LoginComponent {
   form: FormGroup;
-  user$ = this.authService.user$;
 
   constructor(
     private authService: AuthService,

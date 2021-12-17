@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'create',
-    // canActivate: [IsLogoutGuard],
+    canActivate: [IsLogoutGuard],
     loadChildren: () =>
       import('./create-idea/create-idea.module').then(
         (m) => m.CreateIdeaPageModule

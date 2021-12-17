@@ -23,11 +23,12 @@
         <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
 
-      <ion-button type="submit" expand="block" (click)="onSubmit()" [disabled]="!form.valid">Sign in</ion-button>
+      <ion-button type="submit" expand="block" [disabled]="!form.valid">Sign in</ion-button>
     </form>
 
     <ion-text class="extra-options">
       Don't have an account yet?
+      <a [routerLink]="['/auth/register']">Create an account</a>
     </ion-text>
   </ion-card-content>
 </ion-card>

@@ -25,7 +25,13 @@ export class AuthService {
     });
   }
 
-  register() {}
+  async register(email: string, password: string) {
+    return await this.afAuth
+      .createUserWithEmailAndPassword(email, password)
+      .catch((error) => {
+        this.toastError(error);
+      });
+  }
 
   requestPassword() {}
 
