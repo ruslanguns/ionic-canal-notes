@@ -16,12 +16,14 @@ export class AuthService {
       return await this.afAuth.signInWithEmailAndPassword(email, password);
     } catch (error) {
       this.toastError(error);
+      throw new Error(error);
     }
   }
 
   async logout() {
     return await this.afAuth.signOut().catch((error) => {
       this.toastError(error);
+      throw new Error(error);
     });
   }
 
@@ -30,12 +32,25 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .catch((error) => {
         this.toastError(error);
+        throw new Error(error);
       });
   }
 
-  requestPassword() {}
+  async requestPassword(email: string) {
+    return await this.afAuth.sendPasswordResetEmail(email).catch((error) => {
+      this.toastError(error);
+      throw new Error(error);
+    });
+  }
 
-  resetPassword() {}
+  async resetPassword(passsword: string, oobCode: string) {
+    return await this.afAuth
+      .confirmPasswordReset(oobCode, passsword)
+      .catch((error) => {
+        this.toastError(error);
+        throw new Error(error);
+      });
+  }
 
   async toastError(error: any) {
     const toast = await this.toastController.create({

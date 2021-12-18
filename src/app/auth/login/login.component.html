@@ -22,6 +22,9 @@
         <ion-label position="floating">Password</ion-label>
         <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
+      <ion-text class="extra-options">
+        <a [routerLink]="['/auth/forgot']">Forget password?</a>
+      </ion-text>
 
       <ion-button type="submit" expand="block" [disabled]="!form.valid">Sign in</ion-button>
     </form>
