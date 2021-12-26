@@ -26,6 +26,7 @@ const checkPasswords: ValidatorFn = (
 })
 export class RegisterComponent {
   form: FormGroup;
+  loading = false;
 
   constructor(
     private authService: AuthService,
@@ -56,10 +57,15 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.form.valid) {
+      this.loading = true;
       const { email, password } = this.form.value;
       this.authService
         .register(email, password)
-        .then(() => this.router.navigate(['/']));
+        .then(() => {
+          this.router.navigate(['/']);
+          this.loading = false;
+        })
+        .catch(() => (this.loading = false));
     }
   }
 }

@@ -26,7 +26,9 @@
         <a [routerLink]="['/auth/forgot']">Forget password?</a>
       </ion-text>
 
-      <ion-button type="submit" expand="block" [disabled]="!form.valid">Sign in</ion-button>
+      <ion-button type="submit" expand="block" [disabled]="!form.valid || loading">
+        {{ loading ? 'Loading...' : 'Sign in'}}
+      </ion-button>
     </form>
 
     <ion-text class="extra-options">

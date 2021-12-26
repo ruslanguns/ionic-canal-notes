@@ -27,6 +27,7 @@ const checkPasswords: ValidatorFn = (
 export class ResetPasswordComponent {
   form: FormGroup;
   oobCode: string = null;
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -58,10 +59,15 @@ export class ResetPasswordComponent {
 
   onSubmit() {
     if (this.form.valid && this.oobCode) {
+      this.loading = true;
       const { password } = this.form.value;
-      this.authService.resetPassword(password, this.oobCode).then(() => {
-        this.router.navigate(['/auth/login']);
-      });
+      this.authService
+        .resetPassword(password, this.oobCode)
+        .then(() => {
+          this.router.navigate(['/auth/login']);
+          this.loading = false;
+        })
+        .catch(() => (this.loading = false));
     }
   }
 }

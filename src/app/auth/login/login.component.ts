@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class LoginComponent {
   form: FormGroup;
+  loading = false;
 
   constructor(
     private authService: AuthService,
@@ -24,10 +25,15 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.form.valid) {
+      this.loading = true;
       const { email, password } = this.form.value;
       this.authService
         .login(email, password)
-        .then(() => this.router.navigate(['/']));
+        .then(() => {
+          this.router.navigate(['/']);
+          this.loading = false;
+        })
+        .catch(() => (this.loading = false));
     }
   }
 }

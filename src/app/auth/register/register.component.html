@@ -44,7 +44,9 @@
         </ion-text>
       </ion-item>
 
-      <ion-button type="submit" expand="block">Sign up</ion-button>
+      <ion-button type="submit" expand="block" [disabled]="loading || !form.valid">
+        {{ loading ? 'Loading...' : 'Sign up'}}
+      </ion-button>
     </form>
 
     <ion-text class="extra-options">

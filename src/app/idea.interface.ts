@@ -6,6 +6,7 @@ export interface Idea {
   description: string;
   tags?: Array<'My idea' | 'Featured' | 'New'>;
   cover?: string;
+  author: string;
   updatedAt?: string;
   createdAt?: string;
 }

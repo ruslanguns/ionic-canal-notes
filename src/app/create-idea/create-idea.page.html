@@ -6,9 +6,16 @@
     <ion-text>
       <h2>Giving an idea</h2>
     </ion-text>
-    <ion-button color="light" slot="end" shape="round" (click)="form.valid && onSubmit()" [disabled]="!form.valid">
-      <ion-icon slot="start" name="add-sharp"></ion-icon>
-      Create
+    <ion-button color="light" slot="end" shape="round" (click)="form.valid && onSubmit()"
+      [disabled]="!form.valid || loading">
+      <ng-container *ngIf="!loading; else ShowLoading">
+        <ion-icon slot="start" name="add-sharp"></ion-icon>
+        Create
+      </ng-container>
+      <ng-template #ShowLoading>
+        <ion-icon name="refresh-sharp"></ion-icon>
+        Loading...
+      </ng-template>
     </ion-button>
   </ion-toolbar>
 </ion-header>

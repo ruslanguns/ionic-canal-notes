@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../core/services/auth.service';
 import { IdeasService } from '../core/services/ideas.service';
+import firebase from 'firebase/compat/app';
 
 @Component({
   selector: 'app-create-idea',
@@ -10,9 +12,12 @@ import { IdeasService } from '../core/services/ideas.service';
 })
 export class CreateIdeaPage {
   form: FormGroup;
+  user: firebase.User;
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
+    private authService: AuthService,
     private ideasService: IdeasService,
     private router: Router
   ) {
@@ -34,6 +39,8 @@ export class CreateIdeaPage {
         ],
       ],
     });
+
+    this.authService.user$.subscribe((user) => (this.user = user));
   }
 
   get titleLength() {
@@ -46,15 +53,21 @@ export class CreateIdeaPage {
 
   onSubmit() {
     if (this.form.valid) {
+      this.loading = true;
       const { title, description } = this.form.value;
-      const newIdea = this.ideasService.create({ title, description });
-
-      if (newIdea) {
-        console.log('Idea creada!', newIdea);
-        this.router.navigate(['/']);
-      }
-    } else {
-      console.log('hay problemas con el formulario');
+      this.ideasService
+        .create({
+          title,
+          description,
+          author: this.user?.uid,
+        })
+        .then(() => {
+          this.router.navigate(['/']);
+          this.loading = false;
+        })
+        .catch(() => {
+          this.loading = false;
+        });
     }
   }
 }

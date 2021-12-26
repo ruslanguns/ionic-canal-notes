@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class ForgotPasswordComponent {
   form: FormGroup;
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -27,10 +28,15 @@ export class ForgotPasswordComponent {
 
   onSubmit() {
     if (this.form.valid) {
+      this.loading = true;
       const { email } = this.form.value;
       this.authService
         .requestPassword(email)
-        .then(() => this.router.navigate(['/auth/login']));
+        .then(() => {
+          this.router.navigate(['/auth/login']);
+          this.loading = false;
+        })
+        .catch(() => (this.loading = false));
     }
   }
 }
