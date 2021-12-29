@@ -21,6 +21,11 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
+    path: 'idea/:ideaId',
+    loadChildren: () =>
+      import('./idea/idea.module').then((m) => m.IdeaPageModule),
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full',

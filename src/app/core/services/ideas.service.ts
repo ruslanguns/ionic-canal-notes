@@ -27,7 +27,7 @@ export class IdeasService {
     );
   }
 
-  getOne(id: string) {
+  getOne(id: string): Observable<Idea> {
     return this.collection
       .doc(id)
       .snapshotChanges()
